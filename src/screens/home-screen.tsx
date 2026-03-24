@@ -1,12 +1,18 @@
 import { useAuth } from "@/src/store/AuthContext"
 import React from "react"
 import { Platform, ScrollView, StyleSheet, Text, View } from "react-native"
+import { useSafeAreaInsets } from "react-native-safe-area-context"
 
 export default function HomeScreen() {
+   const insets = useSafeAreaInsets()
    const { user } = useAuth()
 
    return (
-      <ScrollView style={styles.root} contentContainerStyle={styles.container}>
+      <ScrollView
+         className="flex-1 bg-background"
+         contentContainerStyle={{ paddingBottom: insets.bottom + 80 }} // espaço para BottomNav
+         showsVerticalScrollIndicator={false}
+      >
          {/* Welcome banner */}
          <View style={styles.banner}>
             <Text style={styles.bannerLabel}>Bem-vindo de volta 👋</Text>
