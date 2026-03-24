@@ -1,8 +1,8 @@
+import { Button, ErrorBanner, Input } from "@/src/components/ui"
+import { useAuth } from "@/src/store/auth-context"
+import { StatusBar } from "expo-status-bar"
 import React, { useState } from "react"
 import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, View } from "react-native"
-import { StatusBar } from "expo-status-bar"
-import { useAuth } from "@/src/store/AuthContext"
-import { Button, ErrorBanner, Input } from "@/src/components/ui"
 
 export default function LoginScreen() {
    const { login } = useAuth()
@@ -19,10 +19,12 @@ export default function LoginScreen() {
       }
       setError(null)
       setLoading(true)
+      console.log("email", email)
+      console.log("password", password)
       try {
          await login(email.trim().toLowerCase(), password)
       } catch (err: unknown) {
-         setError(err instanceof Error ? err.message : "Erro ao entrar.")
+         setError(err instanceof Error ? `${err.message} - ERRO` : "Erro ao entrar.")
       } finally {
          setLoading(false)
       }

@@ -1,6 +1,7 @@
-import { AuthProvider, useAuth } from "@/src/store/AuthContext"
+import { AuthProvider, useAuth } from "@/src/store/auth-context"
 import { Slot, useRouter, useSegments } from "expo-router"
 import { useEffect } from "react"
+import { SafeAreaProvider } from "react-native-safe-area-context"
 
 function NavigationGuard() {
    const { isAuthenticated, isLoading } = useAuth()
@@ -18,15 +19,17 @@ function NavigationGuard() {
       } else if (isAuthenticated && inAuthGroup) {
          router.replace("/(app)/home")
       }
-   }, [isAuthenticated, isLoading, segments])
+   }, [isAuthenticated, isLoading, segments, router])
 
    return <Slot />
 }
 
 export default function RootLayout() {
    return (
-      <AuthProvider>
-         <NavigationGuard />
-      </AuthProvider>
+      <SafeAreaProvider>
+         <AuthProvider>
+            <NavigationGuard />
+         </AuthProvider>
+      </SafeAreaProvider>
    )
 }

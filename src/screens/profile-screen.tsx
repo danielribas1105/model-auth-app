@@ -1,7 +1,7 @@
+import { Button } from "@/src/components/ui"
+import { useAuth } from "@/src/store/auth-context"
 import React, { useState } from "react"
 import { ScrollView, StyleSheet, Text, View } from "react-native"
-import { useAuth } from "@/src/store/AuthContext"
-import { Button } from "@/src/components/ui"
 
 export default function ProfileScreen() {
    const { user, logout } = useAuth()
